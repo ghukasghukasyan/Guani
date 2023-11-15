@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Guani.Domain\Guani.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

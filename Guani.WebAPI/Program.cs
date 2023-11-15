@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Infrastructure;
+using System.Reflection;
 
 namespace Guani.WebAPI
 {
@@ -10,11 +11,13 @@ namespace Guani.WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            var applicationAssembly = Assembly.Load("Guani.Application");
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddMediatR();
 
             var configuration = builder.Configuration;
             builder.Services.AddDbContext<GuaniContext>(options =>

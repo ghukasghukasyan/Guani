@@ -14,9 +14,15 @@ namespace OnlineShop.Domain.Entities
         public string PhoneNumber { get; private set; }
         public virtual List<Order> Orders { get; private set; }
 
-        public Customer()
+        public Customer(Guid id, string name, string surname, string phoneNumber)
         {
-
+            Id = id;
+            Name = name;
+            Surname = surname;
+            PhoneNumber = phoneNumber;
+            Orders = new List<Order>();
         }
+
+
     }
 }

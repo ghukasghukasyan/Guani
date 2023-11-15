@@ -5,8 +5,8 @@ using OnlineShop.DTO;
 
 namespace OnlineShop.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("[Customer]")]
     public class CustomerController : Controller
     {
         private readonly IMediator _mediator;
@@ -16,6 +16,7 @@ namespace OnlineShop.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost]
         public async Task<ActionResult<CustomerDTO>> Create(CustomerDTO customerDTO)
         {
             var result = await _mediator.Send(new CreateCustomerCommand(customerDTO));
