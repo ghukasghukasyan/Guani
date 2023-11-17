@@ -21,9 +21,9 @@ namespace Guani.Application.Commands.V1_0.Customers
     public class CreatCustomerCommandHandler : BaseCommandHandler, ICommandHandler<CreateCustomerCommand, CustomerDTO>
     {
         private readonly ICustomerDomainService _customerDomainService;
-        public CreatCustomerCommandHandler(IGuaniContext guaniContext, IMapper mapper, ILogger logger) : base(guaniContext, mapper, logger)
+        public CreatCustomerCommandHandler(IGuaniContext guaniContext, IMapper mapper, ILogger<CreatCustomerCommandHandler> logger, ICustomerDomainService customerDomainService) : base(guaniContext, mapper, logger)
         {
-
+            _customerDomainService = customerDomainService;
         }
         public async Task<CustomerDTO> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {

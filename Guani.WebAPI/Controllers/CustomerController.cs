@@ -7,7 +7,7 @@ namespace OnlineShop.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CustomerController : Controller
+    public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
 
