@@ -20,7 +20,16 @@ namespace OnlineShop.Controllers
         public async Task<ActionResult<CustomerDTO>> Create(CustomerDTO customer)
         {
             var result = await _mediator.Send(new CreateCustomerCommand(customer));
+
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteCustomerCommand(id));
+
+            return Ok();
         }
     };
 
