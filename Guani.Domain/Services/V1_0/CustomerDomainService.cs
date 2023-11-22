@@ -14,7 +14,9 @@ namespace Guani.Domain.Services.V1_0
         }
         public async Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken)
         {
-            var newCustomer = new Customer(new Guid(), customer.Name, customer.Surname, customer.PhoneNumber);
+            customer.InitializeId();
+
+            var newCustomer = new Customer(customer.Id, customer.Name, customer.Surname, customer.PhoneNumber);
 
             var result = await _guaniContext.Customers.AddAsync(newCustomer, cancellationToken);
 
