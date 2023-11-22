@@ -1,4 +1,5 @@
 ﻿using Guani.Domain.Entities;
+using Guani.Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;

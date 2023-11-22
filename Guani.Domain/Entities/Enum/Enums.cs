@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Guani.Domain.Entities
+namespace Guani.Domain.Entities.Enum
 {
     public enum ErrorCode
     {

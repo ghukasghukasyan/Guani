@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Guani.Domain.Core;
+using Guani.Domain.Entities.Customer;
 using Guani.Domain.Interfaces.V1_0.Customers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineShop.Domain.Entities;
 using OnlineShop.DTO;
 
 namespace Guani.Application.Commands.V1_0.Customers
@@ -31,7 +32,13 @@ namespace Guani.Application.Commands.V1_0.Customers
 
             var createdCustomer = await _customerDomainService.CreateAsync(customer, cancellationToken);
 
-            return new CustomerDTO { };
+            await _guaniContext.SaveChangesAsync(cancellationToken);
+
+            var result = await _guaniContext.Customers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == createdCustomer.Id, cancellationToken);
+
+            return _mapper.Map<CustomerDTO>(result);
         }
     }
 }

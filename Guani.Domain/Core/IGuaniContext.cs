@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Guani.Domain.Entities.Customer;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Domain.Entities;
+using OnlineShop.Domain.Entities.Order;
 
 namespace Guani.Domain.Core
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Domain.Entities
+namespace OnlineShop.Domain.Entities.Order
 {
     public class Order
     {

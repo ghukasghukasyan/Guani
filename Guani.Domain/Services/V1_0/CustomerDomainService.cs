@@ -1,12 +1,8 @@
 ﻿using Guani.Domain.Core;
+using Guani.Domain.Entities.Customer;
 using Guani.Domain.Interfaces.V1_0.Customers;
 using Microsoft.Extensions.Logging;
 using OnlineShop.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Guani.Domain.Services.V1_0
 {
@@ -14,7 +10,7 @@ namespace Guani.Domain.Services.V1_0
     {
         public CustomerDomainService(IGuaniContext guaniContext, ILogger<CustomerDomainService> logger) : base(guaniContext, logger)
         {
-                
+
         }
         public async Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken)
         {

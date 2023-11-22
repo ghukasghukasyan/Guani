@@ -7,19 +7,19 @@ namespace OnlineShop.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public CustomerController(IMediator mediator)
+        public CustomersController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerDTO>> Create(CustomerDTO customerDTO)
+        public async Task<ActionResult<CustomerDTO>> Create(CustomerDTO customer)
         {
-            var result = await _mediator.Send(new CreateCustomerCommand(customerDTO));
+            var result = await _mediator.Send(new CreateCustomerCommand(customer));
             return Ok(result);
         }
     };

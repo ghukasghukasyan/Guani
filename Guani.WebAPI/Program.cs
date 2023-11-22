@@ -3,6 +3,7 @@ using Guani.Domain.Interfaces.V1_0.Customers;
 using Guani.Domain.Services.V1_0;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Infrastructure;
+using MediatR;
 using System.Reflection;
 
 namespace Guani.WebAPI
@@ -12,34 +13,31 @@ namespace Guani.WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+           
             var applicationAssembly = Assembly.Load("Guani.Application");
-            builder.Services.AddMediatR(x => x.RegisterServicesFromAssembly(applicationAssembly));
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            builder.Services.AddLogging();
-            
-            var configuration = builder.Configuration;
-            builder.Services.AddScoped<IGuaniContext, GuaniContext>();
-            
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
+
             builder.Services.AddDbContext<GuaniContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
             });
+            
+            builder.Services.AddScoped<IGuaniContext, GuaniContext>();
 
-            // Add services to the container.
-            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-
+            
             #region Domain Services
 
             builder.Services.AddTransient<ICustomerDomainService, CustomerDomainService>();
 
             #endregion
-            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -50,11 +48,8 @@ namespace Guani.WebAPI
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
