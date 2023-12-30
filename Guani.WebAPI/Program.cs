@@ -2,9 +2,9 @@ using Guani.Domain.Core;
 using Guani.Domain.Interfaces.V1_0.Customers;
 using Guani.Domain.Services.V1_0;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop.Infrastructure;
 using MediatR;
 using System.Reflection;
+using Guani.Infrastructure;
 
 namespace Guani.WebAPI
 {

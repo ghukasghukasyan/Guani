@@ -5,7 +5,7 @@ using OnlineShop.Domain.Entities.Order;
 
 namespace Guani.Domain.Core
 {
-    public interface IGuaniContext
+    public interface IGuaniContext :IGuaniBaseDbContext
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }

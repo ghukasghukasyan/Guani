@@ -3,7 +3,7 @@ using Guani.Domain.Entities.Customer;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Domain.Entities.Order;
 
-namespace OnlineShop.Infrastructure
+namespace Guani.Infrastructure
 {
     public class GuaniContext : DbContext, IGuaniContext
     {
