@@ -1,11 +1,6 @@
 ﻿using Guani.Domain.Core;
 using Guani.Domain.Rules;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Guani.Domain.Services
 {
@@ -30,8 +25,7 @@ namespace Guani.Domain.Services
             }
         }
 
-
-        protected static async Task CheckRule(IAsyncRule rule)
+        protected static async Task CheckRuleAsync(IAsyncRule rule)
         {
             if (await rule.IsBroken())
             {

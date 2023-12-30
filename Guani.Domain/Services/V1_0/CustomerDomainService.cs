@@ -1,8 +1,8 @@
 ﻿using Guani.Domain.Core;
 using Guani.Domain.Entities.Customer;
 using Guani.Domain.Interfaces.V1_0.Customers;
+using Guani.Domain.Rules.GenericRules;
 using Microsoft.Extensions.Logging;
-using OnlineShop.Domain.Entities;
 
 namespace Guani.Domain.Services.V1_0
 {
@@ -23,9 +23,11 @@ namespace Guani.Domain.Services.V1_0
             return result.Entity;
         }
 
-        public Task DeleteAsync(Customer entity, CancellationToken cancellationToken)
+        public async Task DeleteAsync(Customer customer, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await CheckRuleAsync(new EntityExists<Customer>(customer.Id, _guaniContext, cancellationToken));
+
+            _guaniContext.Customers.Remove(customer);
         }
 
         public Task<Customer> UpdateAsync(Customer entity, CancellationToken cancellationToken)

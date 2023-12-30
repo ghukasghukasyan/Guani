@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using Guani.Domain.Core;
 using Guani.Domain.Interfaces.V1_0.Customers;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Guani.Application.Commands.V1_0.Customers
 {
@@ -20,7 +17,6 @@ namespace Guani.Application.Commands.V1_0.Customers
         }
     }
 
-
     public class DeleteCustomerCommandHandler : BaseCommandHandler, ICommandHandler<DeleteCustomerCommand>
     {
         private readonly ICustomerDomainService _customerDomainService;
@@ -28,9 +24,19 @@ namespace Guani.Application.Commands.V1_0.Customers
         {
             _customerDomainService = customerDomainService;
         }
-        public Task Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            var existing = await _guaniContext.Customers.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
+            if (existing == null)
+            {
+                throw new Exception($"Customer with the given id {request.Id} does not exist");
+            }
+
+            await _customerDomainService.DeleteAsync(existing, cancellationToken);
+
+            return;
         }
+
     }
 }
