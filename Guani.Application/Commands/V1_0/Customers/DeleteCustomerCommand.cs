@@ -35,6 +35,8 @@ namespace Guani.Application.Commands.V1_0.Customers
 
             await _customerDomainService.DeleteAsync(existing, cancellationToken);
 
+            await _guaniContext.SaveChangesAsync(cancellationToken);
+
             return;
         }
 
