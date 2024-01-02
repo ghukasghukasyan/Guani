@@ -2,9 +2,9 @@
 using Guani.Domain.Core;
 using Guani.Domain.Entities.Customer;
 using Guani.Domain.Interfaces.V1_0.Customers;
+using Guani.DTO.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineShop.DTO;
 
 namespace Guani.Application.Commands.V1_0.Customers
 {
@@ -19,10 +19,10 @@ namespace Guani.Application.Commands.V1_0.Customers
     }
 
 
-    public class CreatCustomerCommandHandler : BaseCommandHandler, ICommandHandler<CreateCustomerCommand, CustomerDTO>
+    public class CreateCustomerCommandHandler : BaseCommandHandler, ICommandHandler<CreateCustomerCommand, CustomerDTO>
     {
         private readonly ICustomerDomainService _customerDomainService;
-        public CreatCustomerCommandHandler(IGuaniContext guaniContext, IMapper mapper, ILogger<CreatCustomerCommandHandler> logger, ICustomerDomainService customerDomainService) : base(guaniContext, mapper, logger)
+        public CreateCustomerCommandHandler(IGuaniContext guaniContext, IMapper mapper, ILogger<CreateCustomerCommandHandler> logger, ICustomerDomainService customerDomainService) : base(guaniContext, mapper, logger)
         {
             _customerDomainService = customerDomainService;
         }

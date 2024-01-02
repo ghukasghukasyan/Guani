@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Guani.Domain\Guani.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataAccess\" />
-  </ItemGroup>
-
 </Project>

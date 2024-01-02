@@ -7,7 +7,7 @@ using OnlineShop.Domain.Entities.Order;
 using System.Data;
 using System.Data.Common;
 
-namespace Guani.Infrastructure
+namespace Guani.Infrastructure.DataAccess
 {
     public class GuaniContext : DbContext, IGuaniBaseDbContext, IGuaniContext
     {
@@ -93,11 +93,11 @@ namespace Guani.Infrastructure
             if (addedItems != null && addedItems.Any())
             {
                 IEnumerable<EntityEntry<TEntity>> source = from x in ChangeTracker.Entries<TEntity>()
-                                                           where addedItems.Select((TEntity y) => y.Id).Contains(x.Entity.Id)
+                                                           where addedItems.Select((y) => y.Id).Contains(x.Entity.Id)
                                                            select x;
                 foreach (TEntity item3 in addedItems)
                 {
-                    EntityEntry<TEntity> entityEntry = source.First((EntityEntry<TEntity> x) => x.Entity.Id == item3.Id);
+                    EntityEntry<TEntity> entityEntry = source.First((x) => x.Entity.Id == item3.Id);
                     entityEntry.State = EntityState.Added;
                 }
             }
@@ -105,11 +105,11 @@ namespace Guani.Infrastructure
             if (updatedItems != null && updatedItems.Any())
             {
                 IEnumerable<EntityEntry<TEntity>> source2 = from x in ChangeTracker.Entries<TEntity>()
-                                                            where updatedItems.Select((TEntity y) => y.Id).Contains(x.Entity.Id)
+                                                            where updatedItems.Select((y) => y.Id).Contains(x.Entity.Id)
                                                             select x;
                 foreach (TEntity item2 in updatedItems)
                 {
-                    EntityEntry<TEntity> entityEntry2 = source2.First((EntityEntry<TEntity> x) => x.Entity.Id == item2.Id);
+                    EntityEntry<TEntity> entityEntry2 = source2.First((x) => x.Entity.Id == item2.Id);
                     entityEntry2.State = EntityState.Modified;
                 }
             }
@@ -120,11 +120,11 @@ namespace Guani.Infrastructure
             }
 
             IEnumerable<EntityEntry<TEntity>> source3 = from x in ChangeTracker.Entries<TEntity>()
-                                                        where deletedItems.Select((TEntity y) => y.Id).Contains(x.Entity.Id)
+                                                        where deletedItems.Select((y) => y.Id).Contains(x.Entity.Id)
                                                         select x;
             foreach (TEntity item in deletedItems)
             {
-                EntityEntry<TEntity> entityEntry3 = source3.First((EntityEntry<TEntity> x) => x.Entity.Id == item.Id);
+                EntityEntry<TEntity> entityEntry3 = source3.First((x) => x.Entity.Id == item.Id);
                 entityEntry3.State = EntityState.Deleted;
             }
         }
