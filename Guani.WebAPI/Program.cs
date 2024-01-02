@@ -4,7 +4,7 @@ using Guani.Domain.Services.V1_0;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Reflection;
-using Guani.Infrastructure;
+using Guani.Infrastructure.DataAccess;
 
 namespace Guani.WebAPI
 {

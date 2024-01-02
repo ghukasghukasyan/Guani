@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Guani.Domain.Entities.Customer;
-using OnlineShop.Domain.Entities;
-using OnlineShop.DTO;
+using Guani.DTO.Customers;
 
 namespace Guani.WebAPI.Mappings.Customers
 {

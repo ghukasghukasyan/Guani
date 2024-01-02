@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Guani.DTO
+namespace Guani.DTO.Orders
 {
     public class OrderDTO
     {

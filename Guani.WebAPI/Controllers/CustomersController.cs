@@ -1,7 +1,7 @@
 using Guani.Application.Commands.V1_0.Customers;
+using Guani.DTO.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.DTO;
 
 namespace OnlineShop.Controllers
 {
@@ -17,6 +17,11 @@ namespace OnlineShop.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public async Task<ActionResult<CustomerDTO>> Create(CustomerDTO customer)
         {
             var result = await _mediator.Send(new CreateCustomerCommand(customer));
@@ -24,7 +29,24 @@ namespace OnlineShop.Controllers
             return Ok(result);
         }
 
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public async Task<ActionResult<CustomerDTO>> Update(CustomerDTO customer)
+        {
+            var result = await _mediator.Send(new UpdateCustomerCommand(customer));
+
+            return Ok(result);
+        }
+
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeleteCustomerCommand(id));
