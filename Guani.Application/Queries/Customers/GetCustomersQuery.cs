@@ -1,18 +1,10 @@
 ﻿using AutoMapper;
-using Chinchilla.Logging;
 using Guani.Domain.Core;
 using Guani.Domain.Entities.Customer;
 using Guani.Domain.Interfaces.V1_0.Customers;
 using Guani.DTO.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.ServiceModel.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Guani.Application.Queries.Customers
 {
@@ -44,6 +36,15 @@ namespace Guani.Application.Queries.Customers
                 query = query.Where(x => x.Name == request.Name);
             }
 
+            if (request.Skip is not null)
+            {
+                query = query.Skip(request.Skip.Value);
+            }
+
+            if (request.Take is not null)
+            {
+                query = query.Take(request.Take.Value);
+            }
             var customers = await query.ToListAsync(cancellationToken);
 
             return _mapper.Map<List<CustomerDTO>>(customers);
